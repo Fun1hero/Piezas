@@ -59,31 +59,18 @@ void Piezas::reset()
  * Trying to drop a piece where it cannot be placed loses the player's turn
 **/ 
 Piece Piezas::dropPiece(int column)
-{
-    if (column < 0 || column > BOARD_ROWS-1)
-    {
-        Piece toggle = turn;
-        turn = (turn == X) ? O : X;
+{   
+    Piece cTurn = turn;
+    turn = (turn == X) ? O : X;
+    if (column < 0 || column >= BOARD_COLS)
         return Invalid;
-    }
-    
-    if (board[BOARD_ROWS-1][column] == Blank)
-    {
-        for (unsigned i = 0; i < BOARD_ROWS; i--)
+     
+    for (unsigned i = 0; i < BOARD_ROWS; i++)
+        if(board[i][column] == Blank)
         {
-            if(board[i][column] == Blank)
-                board[i][column] = turn;
+            board[i][column] = cTurn;
+            return cTurn;
         }
-        Piece toggle = turn;
-        turn = (turn == X) ? O : X;
-        return toggle;
-    } 
-    else 
-    {   
-        Piece toggle = turn;
-        turn = (turn == X) ? O : X;
-        return Blank;
-    }
     return Blank;
 }
 
@@ -93,7 +80,7 @@ Piece Piezas::dropPiece(int column)
 **/
 Piece Piezas::pieceAt(int row, int column)
 {
-    return ((row < 0 || row > BOARD_ROWS-1) || (column < 0 || column > BOARD_COLS-1))? Invalid : board[row][column];
+    return ((row < 0 || row >= BOARD_ROWS) || (column < 0 || column >= BOARD_COLS))? Invalid : board[row][column];
 }
 
 /**

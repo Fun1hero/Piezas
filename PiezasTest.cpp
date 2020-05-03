@@ -52,6 +52,7 @@ TEST(PiezasTest, drop_o)
   Piezas board;
   Piece piece;
   piece = board.dropPiece(0);
+  piece = board.dropPiece(0);
   ASSERT_EQ(piece, O);
 }
 
@@ -82,7 +83,7 @@ TEST(PiezasTest, drop_invalid_position)
 {
   Piezas board;
   Piece piece;
-  piece = board.dropPiece(-1);
+  piece = board.dropPiece(10);
   ASSERT_EQ(piece, Invalid);
 }
 
