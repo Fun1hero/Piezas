@@ -120,7 +120,7 @@ Piece Piezas::gameState()
 
     for (unsigned i = 0; i < BOARD_COLS; i++)
     {
-        for (unsigned j = 0; j < BOARD_COLS; j++)
+        for (unsigned j = 0; j < BOARD_ROWS; j++)
         {
             if (board[j][i]==Blank)
                 return Invalid;
