@@ -203,7 +203,7 @@ TEST(PiezasTest, gamestate_o_won)
 
   Piece state;
   state = board.gameState();
-  ASSERT_EQ(state, X);
+  ASSERT_EQ(state, O);
 }
 
 TEST(PiezasTest, gamestate_ingame)
@@ -213,7 +213,7 @@ TEST(PiezasTest, gamestate_ingame)
 
   Piece state;
   state = board.gameState();
-  ASSERT_EQ(state, X);
+  ASSERT_EQ(state, Invalid);
 }
 
 TEST(PiezasTest, gamestate_tie)
@@ -225,5 +225,5 @@ TEST(PiezasTest, gamestate_tie)
 
   Piece state;
   state = board.gameState();
-  ASSERT_EQ(state, X);
+  ASSERT_EQ(state, Blank);
 }
