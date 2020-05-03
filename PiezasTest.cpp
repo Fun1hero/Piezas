@@ -29,10 +29,10 @@ TEST(PiezasTest, blank_board)
   Piezas board;
   for(int i=0; i < BOARD_ROWS; i++)
   {
-    for(int j=0; j < BOARD_COLS; j++)
-    {
-      ASSERT_EQ(board.pieceAt(i,j), Blank);
-    }
+	for(int j=0; j < BOARD_COLS; j++)
+	{
+	  ASSERT_EQ(board.pieceAt(i,j), Blank);
+	}
   }
 }
 
@@ -142,14 +142,88 @@ TEST(PiezasTest, reset_simple)
 {
   Piezas board;
   for(unsigned int i=0; i < BOARD_ROWS; i++)
-    for(unsigned int j=0; j < BOARD_COLS; j++)
+	for(unsigned int j=0; j < BOARD_COLS; j++)
 		board.dropPiece(i);
 
   board.reset();
   for(unsigned int i=0; i < BOARD_ROWS; i++)
-    for(unsigned int j=0; j < BOARD_COLS; j++)
-      ASSERT_EQ(board.pieceAt(i,j), Blank);
+	for(unsigned int j=0; j < BOARD_COLS; j++)
+	  ASSERT_EQ(board.pieceAt(i,j), Blank);
 }
 
 
 // Game state
+
+TEST(PiezasTest, gamestate_x_won)
+{
+  Piezas board;
+  board.dropPiece(3);
+  board.dropPiece(3);
+
+  board.dropPiece(2);
+  board.dropPiece(3);
+
+  board.dropPiece(1);
+  board.dropPiece(2);
+
+  board.dropPiece(0);
+  board.dropPiece(1);
+
+  board.dropPiece(2);
+  board.dropPiece(1);
+
+  board.dropPiece(0);
+  board.dropPiece(0);
+
+  Piece state;
+  state = board.gameState();
+  ASSERT_EQ(state, X);
+}
+
+TEST(PiezasTest, gamestate_o_won)
+{
+  Piezas board;
+  board.dropPiece(3);
+  board.dropPiece(2);
+
+  board.dropPiece(1);
+  board.dropPiece(3);
+
+  board.dropPiece(0);
+  board.dropPiece(2);
+
+  board.dropPiece(3);
+  board.dropPiece(1);
+
+  board.dropPiece(2);
+  board.dropPiece(0);
+
+  board.dropPiece(1);
+  board.dropPiece(0);
+
+  Piece state;
+  state = board.gameState();
+  ASSERT_EQ(state, X);
+}
+
+TEST(PiezasTest, gamestate_ingame)
+{
+  Piezas board;
+  board.dropPiece(0);
+
+  Piece state;
+  state = board.gameState();
+  ASSERT_EQ(state, X);
+}
+
+TEST(PiezasTest, gamestate_tie)
+{
+  Piezas board;
+  for(unsigned int i=0; i < BOARD_ROWS; i++)
+	for(unsigned int j=0; j < BOARD_COLS; j++)
+		board.dropPiece(i);
+
+  Piece state;
+  state = board.gameState();
+  ASSERT_EQ(state, X);
+}
