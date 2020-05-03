@@ -22,6 +22,17 @@
 **/
 Piezas::Piezas()
 {
+    for (unsigned i = 0; i < BOARD_ROWS; i++)
+    {
+        std::vector<Piece> tmp;
+        for (unsigned j =0; j < BOARD_COLS; j++)
+        {
+            tmp.push_back(Blank);
+        }
+        board.push_back(tmp);
+    }
+
+    turn = X;
 }
 
 /**
@@ -30,6 +41,13 @@ Piezas::Piezas()
 **/
 void Piezas::reset()
 {
+    for (unsigned i = 0; i < BOARD_ROWS; i++)
+    {
+        for (unsigned j =0; j < BOARD_COLS; j++)
+        {
+            board[i][j] = Blank;
+        }
+    }
 }
 
 /**
@@ -42,6 +60,30 @@ void Piezas::reset()
 **/ 
 Piece Piezas::dropPiece(int column)
 {
+    if (column < 0 || column > BOARD_ROWS-1)
+    {
+        Piece toggle = turn;
+        turn = (turn == X) ? O : X;
+        return Invalid;
+    }
+    
+    if (board[BOARD_ROWS-1][column] == Blank)
+    {
+        for (unsigned i = 0; i < BOARD_ROWS; i--)
+        {
+            if(board[i][column] == Blank)
+                board[i][column] = turn;
+        }
+        Piece toggle = turn;
+        turn = (turn == X) ? O : X;
+        return toggle;
+    } 
+    else 
+    {   
+        Piece toggle = turn;
+        turn = (turn == X) ? O : X;
+        return Blank;
+    }
     return Blank;
 }
 
@@ -51,7 +93,7 @@ Piece Piezas::dropPiece(int column)
 **/
 Piece Piezas::pieceAt(int row, int column)
 {
-    return Blank;
+    return ((row < 0 || row > BOARD_ROWS-1) || (column < 0 || column > BOARD_COLS-1))? Invalid : board[row][column];
 }
 
 /**
@@ -65,5 +107,52 @@ Piece Piezas::pieceAt(int row, int column)
 **/
 Piece Piezas::gameState()
 {
-    return Blank;
+    int maxX = 0, maxO = 0;
+    int curX = 0, curO = 0;
+
+    for (unsigned i = 0; i < BOARD_ROWS; i++)
+    {
+        for (unsigned j = 0; j < BOARD_COLS; j++)
+        {
+            if (board[i][j]==Blank)
+                return Invalid;
+            else if (board[i][j] == X)
+            {
+                curO = 0;
+                curX++;
+                maxX = (curX > maxX)? curX : maxX;
+            } 
+            else if (board[i][j] == O)
+            {
+                curX = 0;
+                curO++;
+                maxO = (curO > maxO)? curO : maxO;
+            }
+        }
+    }
+
+    for (unsigned i = 0; i < BOARD_COLS; i++)
+    {
+        for (unsigned j = 0; j < BOARD_COLS; j++)
+        {
+            if (board[j][i]==Blank)
+                return Invalid;
+            else if (board[j][i] == X)
+            {
+                curO = 0;
+                curX++;
+                maxX = (curX > maxX)? curX : maxX;
+            } 
+            else if (board[j][i] == O)
+            {
+                curX = 0;
+                curO++;
+                maxO = (curO > maxO)? curO : maxO;
+            }
+        }
+    }
+    if(maxX == maxO)
+        return Blank;
+    
+    return (maxX > maxO)? X : O;
 }
