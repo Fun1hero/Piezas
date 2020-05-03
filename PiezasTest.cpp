@@ -158,22 +158,22 @@ TEST(PiezasTest, gamestate_x_won)
 {
   Piezas board;
   board.dropPiece(3);
+  board.dropPiece(2);
+
+  board.dropPiece(3);
+  board.dropPiece(1);
+
+  board.dropPiece(2);
+  board.dropPiece(0);
+
+  board.dropPiece(1);
   board.dropPiece(3);
 
-  board.dropPiece(2);
-  board.dropPiece(3);
-
-  board.dropPiece(1);
+  board.dropPiece(0);
   board.dropPiece(2);
 
   board.dropPiece(0);
   board.dropPiece(1);
-
-  board.dropPiece(2);
-  board.dropPiece(1);
-
-  board.dropPiece(0);
-  board.dropPiece(0);
 
   Piece state;
   state = board.gameState();
