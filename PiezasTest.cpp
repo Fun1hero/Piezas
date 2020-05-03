@@ -123,7 +123,7 @@ TEST(PiezasTest, expect_o_at_pos)
   Piece piece;
   board.dropPiece(0);
   board.dropPiece(0);
-  piece = board.pieceAt(0,1);
+  piece = board.pieceAt(1,0);
   ASSERT_EQ(piece, O);
 }
 
