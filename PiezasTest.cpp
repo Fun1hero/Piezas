@@ -221,7 +221,7 @@ TEST(PiezasTest, gamestate_tie)
   Piezas board;
   for(unsigned int i=0; i < BOARD_ROWS; i++)
 	for(unsigned int j=0; j < BOARD_COLS; j++)
-		board.dropPiece(i);
+		board.dropPiece(j);
 
   Piece state;
   state = board.gameState();
