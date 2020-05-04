@@ -1,5 +1,5 @@
 # Travis-CI & Coveralls
-[![Build Status](https://travis-ci.org/Fun1hero/Piezas.svg?branch=master)](https://travis-ci.org/Fun1hero/Piezas)
+[![Build Status](https://travis-ci.org/Fun1hero/Piezas.png?branch=master)](https://travis-ci.org/Fun1hero/Piezas)
 [![Coverage Status](https://coveralls.io/repos/github/Fun1hero/Piezas/badge.png?branch=master)](https://coveralls.io/github/Fun1hero/Piezas?branch=master)
 
 
